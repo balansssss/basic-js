@@ -5,27 +5,36 @@ const { NotImplementedError } = require('../extensions/index.js');
  * 
  */
 const chainMaker = {
+  chains: [],
   getLength() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    return this.chains.length;
   },
-  addLink(/* value */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  addLink(value) {
+    this.chains.push(String(value));
+    return chainMaker;
   },
-  removeLink(/* position */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  removeLink(position) {
+    if (typeof position === 'number' && position > 0 && position - 1 < this.chains.length) {
+      this.chains.splice(position - 1, 1);
+      return chainMaker;
+    } else {
+      this.chains = [];
+      throw new Error('You can\'t remove incorrect link!');
+    }
   },
   reverseChain() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    this.chains = this.chains.reverse();
+    return chainMaker;
   },
   finishChain() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    //console.log(this.chains)
+    const res = `( ${this.chains.join(' )~~( ')} )`;
+    this.chains = [];
+    return res;
   }
 };
+
+//console.log(chainMaker.addLink('GHI').addLink(null).reverseChain().addLink(333).reverseChain().reverseChain().addLink(0).reverseChain().reverseChain().addLink('GHI').finishChain()) // '( null )~~( GHI )~~( 333 )~~( 0 )~~( GHI )')) 
 
 module.exports = {
   chainMaker
