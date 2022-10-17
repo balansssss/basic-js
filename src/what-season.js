@@ -23,8 +23,8 @@ function getSeason(date) {
     try {
       date.getMonth();
     } catch {
-      return ('Invalid date!')
-      //throw new Error('Invalid date!');
+      //return ('Invalid date!')
+      throw new Error('Invalid date!');
     }
 
     const month = date.getMonth();
